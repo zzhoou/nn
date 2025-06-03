@@ -42,6 +42,7 @@ class SVM():
         :param data_train: 包含特征和标签的 NumPy 数组，形状为 (n_samples, n_features + 1)
         """
         X = data_train[:, :-1] #从data_train中提取特征矩阵X
+        y = np.where(data_train[:, -1] == 0, -1, 1) #处理标签列，将0类标签转换为-1，非0类标签转换为1，data_train[:, -1]选择最后一列(标签列)，np.where(condition, x, y)：如果condition为True则选x，否则选y
         y = data_train[:, -1] #处理标签列，将0类标签转换为-1，非0类标签转换为1，data_train[:, -1]选择最后一列(标签列)，np.where(condition, x, y)：如果condition为True则选x，否则选y
 
         n_samples, n_features = X.shape #获取样本数量和特征数量
@@ -96,9 +97,9 @@ if __name__ == '__main__':
     x_train = data_train[:, :2]  # feature [x1, x2]
     t_train = data_train[:, 2]  # 真实标签
     t_train_pred = svm.predict(x_train)  # 预测标签
-    x_test = data_test[:, :2]
-    t_test = data_test[:, 2]
-    t_test_pred = svm.predict(x_test)
+    x_test = data_test[:, :2]  # 提取测试集特征（x1, x2）
+    t_test = data_test[:, 2] # 提取测试集真实标签
+    t_test_pred = svm.predict(x_test) # 对测试集进行预测，得到预测标签
 
     # 评估结果，计算准确率
     acc_train = eval_acc(t_train, t_train_pred)
