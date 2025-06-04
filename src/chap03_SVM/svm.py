@@ -4,18 +4,38 @@
 import numpy as np
 
 def load_data(fname):
-    """载入数据"""
+    """载入数据文件，并将其转换为数值数组。
+    
+    参数:
+        fname (str): 文件路径，指向包含数据的文本文件。
+    
+    返回:
+        numpy.ndarray: 一个二维数组，每行对应一个数据样本，格式为 [x1, x2, t]。
+    """
+
+    # 打开文件（只读模式），自动处理文件关闭
     with open(fname, 'r') as f:
-        data = []
-        line = f.readline() # 首行是标题行，自动跳过
+        data = []  # 创建一个空列表，用于存储每一行数据
+
+        line = f.readline()  # 读取首行（通常是标题），这里自动跳过标题行，不作处理
+
+        # 遍历剩下的每一行
         for line in f:
+            # 去除每行首尾的空白字符，并按空格或制表符进行分割
             line = line.strip().split()
+
+            # 将前两个字段转换为浮点数（特征值）
             x1 = float(line[0])
             x2 = float(line[1])
-            t = int(line[2])
-            data.append([x1, x2, t])
-        return np.array(data)
 
+            # 将第三个字段转换为整数（标签/类别）
+            t = int(line[2])
+
+            # 将这三个值组成一个列表，并添加到 data 列表中
+            data.append([x1, x2, t])
+
+        # 将整个列表转换为 NumPy 数组，方便后续数值计算和处理
+        return np.array(data)
 
 def eval_acc(label, pred):
     """计算准确率"""
@@ -34,7 +54,6 @@ class SVM():
         self.lambda_ = lambda_  # 正则化参数
         self.tolerance = tolerance  # 提前停止的阈值
         pass
-    
 
     def train(self, data_train):
         """
@@ -65,8 +84,8 @@ class SVM():
             # 提前停止：权重更新变化太小
             if np.linalg.norm(self.lr * dw) < self.tolerance:
                 break
+    
         # 请补全此处代码
-
     def predict(self, x):
         """
         预测标签
@@ -78,7 +97,6 @@ class SVM():
         decision_values = np.dot(x, self.w) + self.b  # logits = x·w + b
         # 返回预测标签（0或1）
         return np.where(decision_values >= 0, 1, -1)
-
 
 if __name__ == '__main__':
     # 载入数据，实际使用时将x替换为具体名称

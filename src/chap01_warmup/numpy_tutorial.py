@@ -9,11 +9,11 @@ import numpy as np #将numpy库命名为np
 import matplotlib
 import matplotlib.pyplot as plt #导入matplotlib库并将其命名为plt
 #import放一起代码美观
-matplotlib.use('TkAgg')  # 关键代码，临时指定matplotlib后端代码，指定TkAgg可以确保图形能在标准窗口中正常渲染
+matplotlib.use('TkAgg')  #关键代码，临时指定matplotlib后端代码，指定TkAgg可以确保图形能在标准窗口中正常渲染
 
 # 2.建立一个一维数组 a 初始化为[4,5,6]，(1)输出a 的类型（type）(2)输出a的各维度的大小（shape）(3)输出 a的第一个元素（element）
 print("第二题：\n")
-
+     
 a = np.array([4, 5, 6])
 
 print("(1)输出a 的类型（type）\n", type(a))
@@ -44,6 +44,7 @@ print(a) #输出数组a
 print(a[2, 3], a[0, 0])
 
 # 6.把上一题的 a数组的0到1行，2到3列，放到b里面去，（此处不需要从新建立a,直接调用即可）(1) 输出b; (2) 输出b数组中（0,0）这个元素的值
+print("第六题：\n")
 print("第六题：\n")
 
 b = a[0:2, 1:3]  #0:2表示取第 0 行（包含）到第 2 行（不包含），即实际取第 0 行和第 1 行；2:4表示取第 2 列（包含）到第 4 列（不包含），即实际取第 2 列和第 3 列 
@@ -164,7 +165,7 @@ print("print(np.argmax(x, axis=1))", np.argmax(x, axis=1))# 打印数组 x 沿�
 # 24.画图，y=x*x 其中 x = np.arange(0, 100, 0.1) （使用 NumPy 和 Matplotlib 绘制了二次函数 y=x^2 的图像）
 print("第二十四题：\n")
 
-x = np.arange(0, 100, 0.1) #生成从 0 到 99.9 的数组，步长为 0.1，共 1000 个点 （注：np.arange() 遵循的是左闭右开原则）
+x = np.arange(0, 100, 0.1) #生成从0到99.9的数组，步长为 0.1，共 1000 个点 （注：np.arange() 遵循的是左闭右开原则）
 y = x * x #计算每个 x 对应的y=x^2 的值
 
 plt.figure(figsize=(10, 6))  # 创建一个宽 10 英寸、高 6 英寸的图像窗口
